@@ -1,0 +1,458 @@
+/*
+Przeglądarki internetowe nadają znacznikom HTML wartości początkowe,
+które się różnią w zależności od producenta (np. Chrome, Firefox, Opera, Internet Explorer, Microsoft Edge).
+Dlatego popularną praktyką jest tworzenie tzw. resetów,
+czyli plików CSS zawierających reguły, które nadpisują te wartości,
+aby były one jednolite niezalenie od przeglądarki.
+Więcej na ten temat: https://cssreset.com/what-is-a-css-reset/
+*/
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ZAGADNIENIE PONADPROGRAMOWE
+Rekomendowany zestaw właściwości, które pozwalają na ukrycie tekstu w taki sposób,
+że będzie niewidoczny do standardowego użytkownika, a czytniki ekranowe wciąż będą go czytać.
+Więcej na ten temat: https://webaim.org/techniques/css/invisiblecontent/
+*/
+.screen-reader-only {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/*
+Sekcja pomocnicza, aby zwizualizować pozycje głównych bloków strony. Będzie usunięta w następnych krokach.
+*/
+
+
+.page-content {
+    background-color: ##25072e; /*CZARNE PASKI PO BOKACH STRONY*/
+}
+
+
+.content-section {
+    background-color: #25072e;  /*TO JEST KOLOR PARZYSTYCH POJEMNIKOW*/
+}
+
+.content-section:nth-child(odd) {
+    background-image: url(images/background.svg); 	/*TO JEST KOLOR NIEPARZYSTYCH POJEMNIKOW*/
+	margin: 0;
+	background-attachment: scroll
+	
+}
+
+/*
+Koniec sekcji pomocniczej
+*/
+
+/*
+Ustawiając sekcje nagłówka i stopki w pozycji 'fixed' sprawiamy,
+że niezależnie od pozycji paska przewijania elementy te będą znajdowały się
+w tej samej pozycji względem okna przeglądarki.
+Natomiast pozycję tę ustawiamy za pomocą parametrów 'top', 'bottom', 'right', 'left'.
+*/
+.page-header {     /*TO JEST OD KWADRATU Z NAVIGACJĄ*/
+  
+	background-image: url(images/background.svg);
+	display: flex;
+    padding-top: 50px;
+    padding-left: 50px;
+	background-color: #25072e;
+	text-decoration: none;
+	letter-spacing: 3px;
+	
+}
+
+.page-navigation ul > li > a
+{
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ef008e;
+	opacity: 0.6;
+	font-size: 13px;
+}
+
+.page-navigation ul > li > a:hover
+{
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ef008e;
+	font-size: 13px;
+	opacity: 1;
+}
+
+.page-navigation ul > li
+{
+	display: wrap;
+	
+}
+
+.page-footer {     /*TO JEST OD KWADRATU Z SOCJALAMI*/
+    
+    margin-top: 0;
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 20px;
+	color: #dbd8fb;
+	background-color: #25072e;
+}
+
+.page-footer p{     /*TO JEST OD KWADRATU Z SOCJALAMI*/
+    
+    margin-top: 0;
+	margin-bottom: 0;
+	text-align: center;
+	font-size: 15px;
+	color: #dbd8fb;
+	background-color: #25072e;
+}
+
+.social-links li > a
+{
+	text-decoration: none;
+	
+	
+}
+
+.social-links
+{
+	display: flex;
+	text-direction: column;
+}
+
+
+.fb a
+{
+	color: #ef008e;
+	opacity: 0.8;
+	display: flex;
+	margin-bottom: 15px;
+	padding-left: 15px;
+}
+
+.fb a:hover
+{
+	color: #ef008e;
+	opacity: 1;
+	display: flex;
+}
+
+.insta a
+{
+	color: #ef008e;
+	opacity: 0.8;
+	display: flex;
+	margin-bottom: 15px;
+	padding-left: 15px;
+}
+
+.insta a:hover
+{
+	color: #ef008e;
+	opacity: 1;
+	display: flex;
+}
+
+.lastfm a
+{
+	color: #ef008e;
+	opacity: 0.8;
+	display: flex;
+	margin-bottom: 15px;
+	padding-left: 15px;
+}
+
+.lastfm a:hover
+{
+	color: #ef008e;
+	opacity: 1;
+	display: flex;
+}
+
+.yt a
+{
+	color: #ef008e;
+	opacity: 0.8;
+	display: flex;
+	padding-bottom: 30px;
+	padding-left: 15px;
+}
+
+.yt a:hover
+{
+	color: #ef008e;
+	opacity: 1;
+	display: flex;
+}
+
+/*
+Lewy margines ustawiony na kontenerze z główną zawartością strony sprawia,
+że nie będzie ona nachodzić na nagłówek i stopkę niezależnie od pozycji paska przewijania.
+Na projekcie graficznym sekcja menu ma szerokość około 170px i jest oddalona od krawędzi ekranu
+o 50px, więc można założyć, że 220px marginesu będzie wartością stosunkowo bezpieczną.
+Z kolei spady (padding) nadane na kontener wyznaczają minimalną odległość, na jaką będzie oddalona
+treść strony od otaczających ją granic kontenera (wartość "0 10%" jest
+skrótem od padding-top: 0, padding-bottom: 0, padding-left: 10%, padding-right: 10%).
+Właściwość "text-align: right" przykleja zawartość do prawej strony
+(oddziałuje na elementy, które są elementami inline'owymi, np. tekst, znaczniki <a>, <span> czy elementy z nadanym stylem "display: inline-block").
+*/
+.page-content {
+    
+    padding: 0 ;
+    text-align: right;
+}
+
+/*
+Projekt graficzny zakłada, że każda sekcja strony będzie wypełniać całą wysokość okna przeglądarki
+lub więcej, jeśli zawartość danej sekcji jest wyższa. Dlatego świetnym rozwiązaniem
+będzie użycie jednostki "vh", która oznacza 1% wysokości okna przeglądarki z właściwością "min-height",
+która wymusza wysokość elementu na zadaną wartość lub wyższą.
+*/
+.content-section {
+    min-height: 100vh;
+}
+/*------------------------STYLIZOWANIE NAGŁÓWKÓW ----------------------------------*/
+
+h2.content-section__header    /*TYTUŁY NAGŁÓWKÓW KAŻDEGO POJEMNIKA NP. ABOUT*/
+{
+	text-transform: uppercase;
+	text-decoration: bold;
+	color: #ef008e;
+	margin: 0;
+	letter-spacing: 3px;
+	padding: 40px;
+	font-size: 28px;
+	
+}
+
+
+
+
+
+/*------------------------------- HOME --------------------------------------------*/
+
+#home
+{
+	background-image: url(images/background.svg);
+	
+	
+}
+ul.band-members__desc
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.band-members__item{
+	
+
+	margin-top: 15%;
+	color: #ccc8ff;
+}
+
+.band-members__name   /*STYLOWANIE IMIENIA I NAZWISKA MUZYKA*/
+{
+	text-transform: uppercase;
+	text-decoration: bold;
+}
+
+.band-members__desc   /*STYLOWANIE NAZWY INSTRUMENTU MUZYKA*/
+{
+	text-decoration: bold;
+}
+
+.band-members__item:hover{
+	color: #000;
+}
+
+.band-members__item img:hover{
+	color: #000;
+	margin-bottom: 5px;
+
+}
+
+/*-------------------------------   ABOUT ------------------------------------------*/
+
+#about img
+{
+	border-top: 3px solid #ef008e;
+}
+
+.about-section__desc   /*CAŁA SEKCJA STRAIGHT FROM LUBLIN*/
+{
+	font-size: 15px;
+	text-align: justify;
+	padding: 20px;
+	background-color: #330033;
+	width: 20%;
+	border-bottom: 3px solid #ef008e;	
+	margin-left: 100px;
+	color: #ccc8ff;
+	text-decoration: bold;
+	letter-spacing: 1px;
+}
+
+.about-section__desc-header 
+{
+	text-transform: uppercase;
+}
+
+
+/*------------------------------- CONCERTS -----------------------------------------*/
+
+img.concerts__image
+{
+	width: 450px;
+	height: 250px;
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 3px solid #ef008e;
+}
+
+.concerts__info p
+{
+	color: #ccc8ff;
+	text-align: center;
+}
+
+/*-------------------------------  VIDEO -------------------------------------------*/
+
+iframe
+{
+	border-top: 3px solid #ef008e;
+	margin-right: 50px;
+}
+
+
+/*------------------------------- PHOTOS --------------------------------------------*/
+
+/*.gallery__item img
+{
+	border-top: 5px solid #fff;
+	width: 350px;
+	height :200px;
+	margin-top: 10px;
+}
+
+.gallery
+{
+	display: inline-block;
+	
+}
+
+.gallery ul > li
+{
+	display: block;
+}*/
+
+.gallery__item > img
+{
+	display: inline-flex;
+	flex-wrap: wrap;
+	width: 350px;
+	height :200px;
+	border-top: 3px solid #ef008e;
+}
+
+.content-section ul > li 
+{
+	display: inline-block;
+	padding: 30px;
+}
+
+/*------------------------------- CONTACS --------------------------------------------*/
+
+#contact img
+{
+	margin-top: 50px;
+}
+
+.form__field1
+{
+	padding: 20px;
+}
+
+.form__field2
+{
+	padding: 20px;
+}
+
+.form__field3
+{
+	padding: 20px;
+}
+
+.form__label
+{
+	color: #fff;
+	
+}
+
+.adres
+{
+	color: #fff;
+	float: left;
+}
+
+
+/*------------------------------- ----INPUTY----------------------------------------*/
+
+input
+{
+	background-color: #47344f;
+	width: 300px;
+	border: 2px solid #47344f;
+	border-radius: 3px;
+	height: 30px;
+	font-size: 15px;
+	color: #000;
+}
+
+
+button
+{
+	background-color: #47344f;
+	width: 150px;
+	border: 2px solid #47344f;
+	border-radius: 3px;
+	height: 30px;
+	font-size: 15px;
+	color: #ccc8ff;
+	text-transform: uppercase;
+	
+}
+
+button:hover
+{
+	background-color: #36233e;
+	width: 150px;
+	border: 2px solid #36233e;
+	border-radius: 3px;
+	height: 30px;
+	font-size: 15px;
+	color: #ccc8ff;
+	text-transform: uppercase;
+	
+}
+
+
